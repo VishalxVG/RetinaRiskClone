@@ -160,11 +160,11 @@ class _HomePageState extends State<HomePage> {
             ),
             _analysisButton(),
             const SizedBox(
-              height: 10,
+              height: 5,
             ),
             _descriptionModel(),
             const SizedBox(
-              height: 10,
+              height: 5,
             ),
             _hbA1cTable(),
             _savButton(),
@@ -305,8 +305,8 @@ class _HomePageState extends State<HomePage> {
     //! Gender Type Duration BOX
     return Container(
       padding: const EdgeInsets.only(top: 8, bottom: 8),
-      height: 120,
-      color: Colors.grey.withOpacity(0.15),
+      height: 130,
+      // color: Colors.grey.withOpacity(0.15),
       child: GestureDetector(
         onTap: () {},
         child: Row(
@@ -314,11 +314,20 @@ class _HomePageState extends State<HomePage> {
             Container(
               padding: const EdgeInsets.only(top: 8, bottom: 8),
               width: 95,
+              // color: Colors.grey.withOpacity(0.15),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                color: Colors.grey.withOpacity(0.15),
+              ),
               // color: Colors.amber,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  SvgPicture.asset("assets/images/gender.svg"),
+                  SvgPicture.asset(
+                    "assets/images/gender.svg",
+                    height: 30,
+                    width: 30,
+                  ),
                   const Text(
                     "GENDER",
                     style: TextStyle(
@@ -327,11 +336,11 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                   const Text(
-                    "MALE",
+                    "Male",
                     style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 20,
-                    ),
+                        color: Colors.white,
+                        fontSize: 18,
+                        fontWeight: FontWeight.w600),
                   )
                 ],
               ),
@@ -343,10 +352,18 @@ class _HomePageState extends State<HomePage> {
               padding: const EdgeInsets.only(top: 8, bottom: 8),
               width: 95,
               // color: Colors.amber,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                color: Colors.grey.withOpacity(0.15),
+              ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  SvgPicture.asset("assets/images/gender.svg"),
+                  SvgPicture.asset(
+                    "assets/images/roman1.svg",
+                    height: 30,
+                    width: 30,
+                  ),
                   const Text(
                     "TYPE",
                     style: TextStyle(
@@ -355,10 +372,11 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                   const Text(
-                    "TYPE 2",
+                    "Type 2",
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: 20,
+                      fontSize: 18,
+                      fontWeight: FontWeight.w600,
                     ),
                   )
                 ],
@@ -371,10 +389,18 @@ class _HomePageState extends State<HomePage> {
               padding: const EdgeInsets.only(top: 8, bottom: 8),
               width: 95,
               // color: Colors.amber,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                color: Colors.grey.withOpacity(0.15),
+              ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  SvgPicture.asset("assets/images/gender.svg"),
+                  SvgPicture.asset(
+                    "assets/images/calender.svg",
+                    height: 30,
+                    width: 30,
+                  ),
                   const Text(
                     "DURATION",
                     style: TextStyle(
@@ -386,7 +412,8 @@ class _HomePageState extends State<HomePage> {
                     "0 years",
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: 20,
+                      fontSize: 18,
+                      fontWeight: FontWeight.w600,
                     ),
                   )
                 ],
@@ -398,11 +425,18 @@ class _HomePageState extends State<HomePage> {
             Container(
               padding: const EdgeInsets.only(top: 8, bottom: 8),
               width: 95,
-              // color: Colors.amber,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                color: Colors.grey.withOpacity(0.15),
+              ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  SvgPicture.asset("assets/images/gender.svg"),
+                  SvgPicture.asset(
+                    "assets/images/review.svg",
+                    height: 30,
+                    width: 30,
+                  ),
                   const Text(
                     "DIAGNOSIS",
                     style: TextStyle(
@@ -414,7 +448,8 @@ class _HomePageState extends State<HomePage> {
                     "Yes",
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: 20,
+                      fontSize: 18,
+                      fontWeight: FontWeight.w600,
                     ),
                   )
                 ],
