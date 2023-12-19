@@ -570,7 +570,7 @@ class _NewProfilePageState extends State<NewProfilePage> {
   AppBar _appbar() {
     return AppBar(
       title: const Text("Login"),
-      backgroundColor: const Color(0xff92A3FD),
+      // backgroundColor: const Color(0xff92A3FD),
       actions: <Widget>[
         IconButton(
           icon: const Icon(

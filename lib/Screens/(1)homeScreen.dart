@@ -8,6 +8,9 @@ import 'package:retinarisk/Screens/(4)TopicsPage.dart';
 import 'package:retinarisk/Screens/eyeScreeningButtonPage.dart';
 import 'package:retinarisk/Screens/(2)infoPage.dart';
 import 'package:retinarisk/Screens/(3)trendsPage.dart';
+import 'package:retinarisk/common/utils/colors.dart';
+
+import 'package:syncfusion_flutter_gauges/gauges.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -20,6 +23,7 @@ class _HomePageState extends State<HomePage> {
   List<DescriptionModule> descriptions = [];
   List<SectionModel> sections = [];
   int _currentPageIndex = 0;
+  double newValue = 0;
 
   void _getInitialInfo() {
     descriptions = DescriptionModule.getDescription();
@@ -35,7 +39,7 @@ class _HomePageState extends State<HomePage> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: _floatingActionButton(),
       body: <Widget>[
-        _homePageWindow(),
+        _HomePage(),
         const InfoPage(),
         const TrendsPage(),
         const TopicsPage(
@@ -45,250 +49,8 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Container _homePageWindow() {
-    return Container(
-      color: Colors.white,
-      child: Column(
-        // mainAxisAlignment: MainAxisAlignment.start,
-        // crossAxisAlignment: CrossAxisAlignment.end,
-        children: <Widget>[
-          const SizedBox(
-            height: 10,
-          ),
-          _topBox(),
-          _analysisButton(),
-          const SizedBox(
-            height: 10,
-          ),
-          _descriptionModel(),
-          const SizedBox(
-            height: 10,
-          ),
-          _sectionMethod(),
-          _sizedButton()
-        ],
-      ),
-    );
-  }
-
-  SizedBox _sizedButton() {
+  SizedBox _bottomNavigationBar() {
     return SizedBox(
-      width: 400,
-      height: 45,
-      child: ElevatedButton(
-        onPressed: () {},
-        style: ButtonStyle(
-          backgroundColor: MaterialStateProperty.all<Color>(
-            const Color(0xff92A3FD),
-          ),
-        ),
-        child: const Text('SAVE'),
-      ),
-    );
-  }
-
-  Container _sectionMethod() {
-    return Container(
-      height: 220,
-      width: 400,
-      color: Colors.grey.withOpacity(0.15),
-      child: ListView.separated(
-          itemBuilder: ((context, index) {
-            return Container(
-              height: 100,
-              decoration: BoxDecoration(
-                  color: Colors.white, borderRadius: BorderRadius.circular(16)),
-              child: Column(children: [
-                const SizedBox(
-                  height: 8,
-                ),
-                Text(
-                  sections[index].name,
-                  style: const TextStyle(
-                    fontWeight: FontWeight.w600,
-                    color: Color(0xff92A3FD),
-                  ),
-                ),
-                Row(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(left: 50),
-                      child: Text(
-                        sections[index].text1,
-                        style: const TextStyle(fontSize: 13),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 200),
-                      child: Text(
-                        sections[index].text2,
-                        style: const TextStyle(fontSize: 13),
-                      ),
-                    )
-                  ],
-                ),
-                Row(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(left: 60),
-                      child: Text(
-                        sections[index].value1,
-                        style: const TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.w500),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 220),
-                      child: Text(
-                        sections[index].value2,
-                        style: const TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.w500),
-                      ),
-                    )
-                  ],
-                )
-              ]),
-            );
-          }),
-          separatorBuilder: ((context, index) => const SizedBox(
-                height: 10,
-              )),
-          itemCount: sections.length),
-    );
-  }
-
-  Container _descriptionModel() {
-    return Container(
-      height: 140,
-      width: 400,
-      color: Colors.grey.withOpacity(0.15),
-      child: GestureDetector(
-        onTap: () {},
-        child: ListView.separated(
-            itemBuilder: ((context, index) {
-              return Padding(
-                padding: const EdgeInsets.symmetric(vertical: 8),
-                child: Container(
-                  width: 100,
-                  height: 100,
-                  // color: Colors.red,
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(16)),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Container(
-                        width: 50,
-                        height: 40,
-                        // decoration: const BoxDecoration(
-                        //     color: Colors.white, shape: BoxShape.circle),
-                        child: Padding(
-                          padding: const EdgeInsets.all(8),
-                          child: SvgPicture.asset(descriptions[index].iconpath),
-                        ),
-                      ),
-                      Text(
-                        descriptions[index].type1,
-                        style: const TextStyle(
-                          fontWeight: FontWeight.w400,
-                          color: Colors.black,
-                          fontSize: 14,
-                        ),
-                      ),
-                      Text(
-                        descriptions[index].type2,
-                        style: const TextStyle(
-                          fontWeight: FontWeight.w600,
-                          color: Colors.black,
-                          fontSize: 16,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              );
-            }),
-            separatorBuilder: ((context, index) => const SizedBox(
-                  width: 15,
-                )),
-            scrollDirection: Axis.horizontal,
-            itemCount: descriptions.length),
-      ),
-    );
-  }
-
-  Container _analysisButton() {
-    return Container(
-      width: 400,
-      child: ElevatedButton(
-        onPressed: () {},
-        style: ButtonStyle(
-          backgroundColor: MaterialStateProperty.all<Color>(
-            const Color(0xff92A3FD),
-          ),
-        ),
-        child: const Text('ANALYSIS'),
-      ),
-    );
-  }
-
-  Container _topBox() {
-    return Container(
-      width: 500,
-      height: 220,
-      // color: Colors.amber,
-      child: Column(
-        // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          const SizedBox(
-            height: 10,
-          ),
-          const Text(
-            "SIGHT THREATHING RETIONPATHY RISK",
-            style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.w400,
-              color: Color.fromARGB(255, 48, 45, 45),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(top: 12),
-            child: Image.asset(
-              "assets/images/1234.png",
-              width: 400,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Container _floatingActionButton() {
-    return Container(
-      margin: const EdgeInsets.only(right: 8, bottom: 20),
-      child: FloatingActionButton(
-        onPressed: () {
-          Navigator.of(context).push(
-            MaterialPageRoute(
-              builder: (BuildContext context) {
-                return EyeScreeningPage();
-              },
-            ),
-          );
-        },
-        backgroundColor: const Color(0xffC588F2),
-        child: SvgPicture.asset(
-          'assets/images/eye2.svg', // Replace with the path to your SVG file
-          width: 30.0, // Adjust the width as needed
-          height: 30.0, // Adjust the height as needed
-        ),
-      ),
-    );
-  }
-
-  Container _bottomNavigationBar() {
-    return Container(
       height: 58,
       child: NavigationBar(
         destinations: const [
@@ -369,7 +131,7 @@ class _HomePageState extends State<HomePage> {
             label: '',
           ),
         ],
-        backgroundColor: const Color(0xff92A3FD),
+        backgroundColor: barColor,
         indicatorColor: Colors.transparent,
         onDestinationSelected: (int index) {
           setState(() {
@@ -381,10 +143,344 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  // ignore: non_constant_identifier_names
+  Container _HomePage() {
+    return Container(
+      // color: Colors.red,
+      padding: const EdgeInsets.all(8),
+      child: SingleChildScrollView(
+        child: Column(
+          children: <Widget>[
+            const SizedBox(
+              height: 10,
+            ),
+            _topBox(),
+            const SizedBox(
+              height: 5,
+            ),
+            _analysisButton(),
+            const SizedBox(
+              height: 10,
+            ),
+            _descriptionModel(),
+            const SizedBox(
+              height: 10,
+            ),
+            _hbA1cTable(),
+            _savButton(),
+            const SizedBox(
+              height: 50,
+            )
+          ],
+        ),
+      ),
+    );
+  }
+
+  SizedBox _analysisButton() {
+    return SizedBox(
+      width: double.infinity,
+      child: ElevatedButton(
+        onPressed: () {
+          setState(() {
+            newValue = newValue + 30;
+          });
+        },
+        style: ElevatedButton.styleFrom(
+          backgroundColor: barColor,
+        ),
+        child: const Text('ANALYSIS'),
+      ),
+    );
+  }
+
+  SizedBox _savButton() {
+    return SizedBox(
+      height: 45,
+      width: double.infinity,
+      child: ElevatedButton(
+        onPressed: () {
+          setState(() {
+            newValue = 0;
+          });
+        },
+        style: ButtonStyle(
+          backgroundColor: MaterialStateProperty.all<Color>(
+            barColor,
+          ),
+        ),
+        child: const Text(
+          'SAVE',
+          style: TextStyle(fontSize: 25),
+        ),
+      ),
+    );
+  }
+
+  Container _hbA1cTable() {
+    return Container(
+      height: 220,
+      color: Colors.grey.withOpacity(0.15),
+      child: Column(
+        children: [
+          Container(
+            height: 100,
+            color: Colors.amber,
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          Container(
+            height: 100,
+            color: Colors.amber,
+          ),
+        ],
+      ),
+      // child: ListView.separated(
+      //     itemBuilder: ((context, index) {
+      //       return Container(
+      //         height: 100,
+      //         decoration: BoxDecoration(
+      //             color: Colors.white, borderRadius: BorderRadius.circular(16)),
+      //         child: Column(children: [
+      //           const SizedBox(
+      //             height: 8,
+      //           ),
+      //           Text(
+      //             sections[index].name,
+      //             style: const TextStyle(
+      //               fontWeight: FontWeight.w600,
+      //               color: Color(0xff92A3FD),
+      //             ),
+      //           ),
+      //           Row(
+      //             children: [
+      //               Padding(
+      //                 padding: const EdgeInsets.only(left: 50),
+      //                 child: Text(
+      //                   sections[index].text1,
+      //                   style: const TextStyle(fontSize: 13),
+      //                 ),
+      //               ),
+      //               Padding(
+      //                 padding: const EdgeInsets.only(left: 200),
+      //                 child: Text(
+      //                   sections[index].text2,
+      //                   style: const TextStyle(fontSize: 13),
+      //                 ),
+      //               )
+      //             ],
+      //           ),
+      //           Row(
+      //             children: [
+      //               Padding(
+      //                 padding: const EdgeInsets.only(left: 60),
+      //                 child: Text(
+      //                   sections[index].value1,
+      //                   style: const TextStyle(
+      //                       fontSize: 20, fontWeight: FontWeight.w500),
+      //                 ),
+      //               ),
+      //               Padding(
+      //                 padding: const EdgeInsets.only(left: 220),
+      //                 child: Text(
+      //                   sections[index].value2,
+      //                   style: const TextStyle(
+      //                       fontSize: 20, fontWeight: FontWeight.w500),
+      //                 ),
+      //               )
+      //             ],
+      //           )
+      //         ]),
+      //       );
+      //     }),
+      //     separatorBuilder: ((context, index) => const SizedBox(
+      //           height: 10,
+      //         )),
+      //     itemCount: sections.length),
+    );
+  }
+
+  Container _descriptionModel() {
+    //! Gender Type Duration BOX
+    return Container(
+      padding: const EdgeInsets.only(top: 8, bottom: 8),
+      height: 120,
+      color: Colors.grey.withOpacity(0.15),
+      child: GestureDetector(
+        onTap: () {},
+        child: Row(
+          children: [
+            Container(
+              padding: const EdgeInsets.only(top: 8, bottom: 8),
+              width: 95,
+              // color: Colors.amber,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  SvgPicture.asset("assets/images/gender.svg"),
+                  const Text(
+                    "GENDER",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 15,
+                    ),
+                  ),
+                  const Text(
+                    "MALE",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                    ),
+                  )
+                ],
+              ),
+            ),
+            const SizedBox(
+              width: 5,
+            ),
+            Container(
+              padding: const EdgeInsets.only(top: 8, bottom: 8),
+              width: 95,
+              // color: Colors.amber,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  SvgPicture.asset("assets/images/gender.svg"),
+                  const Text(
+                    "TYPE",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 15,
+                    ),
+                  ),
+                  const Text(
+                    "TYPE 2",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                    ),
+                  )
+                ],
+              ),
+            ),
+            const SizedBox(
+              width: 5,
+            ),
+            Container(
+              padding: const EdgeInsets.only(top: 8, bottom: 8),
+              width: 95,
+              // color: Colors.amber,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  SvgPicture.asset("assets/images/gender.svg"),
+                  const Text(
+                    "DURATION",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 15,
+                    ),
+                  ),
+                  const Text(
+                    "0 years",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                    ),
+                  )
+                ],
+              ),
+            ),
+            const SizedBox(
+              width: 5,
+            ),
+            Container(
+              padding: const EdgeInsets.only(top: 8, bottom: 8),
+              width: 95,
+              // color: Colors.amber,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  SvgPicture.asset("assets/images/gender.svg"),
+                  const Text(
+                    "DIAGNOSIS",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 15,
+                    ),
+                  ),
+                  const Text(
+                    "Yes",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                    ),
+                  )
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Container _topBox() {
+    return Container(
+        padding: const EdgeInsets.all(8),
+        height: 220,
+        // color: Colors.black,
+        //TODO : CUSTOMIZE THE GAUGE CHART
+
+        child: SfRadialGauge(
+          axes: <RadialAxis>[
+            RadialAxis(minimum: 0, maximum: 150, ranges: <GaugeRange>[
+              GaugeRange(startValue: 0, endValue: 50, color: Colors.green),
+              GaugeRange(startValue: 50, endValue: 100, color: Colors.orange),
+              GaugeRange(startValue: 100, endValue: 150, color: Colors.red)
+            ], pointers: <GaugePointer>[
+              NeedlePointer(value: newValue)
+            ], annotations: <GaugeAnnotation>[
+              GaugeAnnotation(
+                  widget: Container(
+                      child: const Text('90.0',
+                          style: TextStyle(
+                              fontSize: 25, fontWeight: FontWeight.bold))),
+                  angle: 90,
+                  positionFactor: 0.5)
+            ])
+          ],
+        ));
+  }
+
+  Container _floatingActionButton() {
+    return Container(
+      margin: const EdgeInsets.only(right: 8, bottom: 20),
+      child: FloatingActionButton(
+        onPressed: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (BuildContext context) {
+                return const EyeScreeningPage();
+              },
+            ),
+          );
+        },
+        backgroundColor: fButtonColor,
+        child: SvgPicture.asset(
+          'assets/images/eye2.svg', // Replace with the path to your SVG file
+          width: 30.0, // Adjust the width as needed
+          height: 30.0, // Adjust the height as needed
+        ),
+      ),
+    );
+  }
+
   AppBar _appBar() {
     return AppBar(
       title: const Text("RetinaRisk"),
-      backgroundColor: const Color(0xff92A3FD),
+      // backgroundColor: const Color(0xff92A3FD),
       // leading: IconButton(
       //   onPressed: () {},
       //   icon: Icon(Icons.arrow_right),
