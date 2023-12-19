@@ -166,13 +166,162 @@ class _HomePageState extends State<HomePage> {
             const SizedBox(
               height: 5,
             ),
-            _hbA1cTable(),
+            _bottomBox(),
             _savButton(),
             const SizedBox(
               height: 50,
             )
           ],
         ),
+      ),
+    );
+  }
+
+  SizedBox _bottomBox() {
+    return SizedBox(
+      height: 220,
+      child: Column(
+        children: [
+          Container(
+            padding: const EdgeInsets.only(top: 8, left: 8, right: 8),
+            height: 100,
+            // color: Colors.amber,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              color: Colors.grey.withOpacity(0.15),
+            ),
+            child: Column(
+              children: [
+                const Text(
+                  "HbA1c",
+                  style: TextStyle(
+                      color: Colors.blue, fontWeight: FontWeight.bold),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text(
+                          "mmol/mol",
+                          style: TextStyle(
+                            color: Colors.white,
+                          ),
+                        ),
+                        TextButton(
+                          onPressed: () {},
+                          child: const Text(
+                            "50",
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 25,
+                                color: Colors.white),
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(
+                      width: 20,
+                    ),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text(
+                          "mmol/mol",
+                          style: TextStyle(
+                            color: Colors.white,
+                          ),
+                        ),
+                        TextButton(
+                          onPressed: () {},
+                          child: const Text(
+                            "50",
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 25,
+                                color: Colors.white),
+                          ),
+                        ),
+                      ],
+                    )
+                  ],
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(
+            height: 5,
+          ),
+          Container(
+            padding: const EdgeInsets.only(top: 8, left: 8, right: 8),
+            height: 100,
+            // color: Colors.amber,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              color: Colors.grey.withOpacity(0.15),
+            ),
+            child: Column(
+              children: [
+                const Text(
+                  "Blood Pressure",
+                  style: TextStyle(
+                      color: Colors.blue, fontWeight: FontWeight.bold),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text(
+                          "Systolic",
+                          style: TextStyle(
+                            color: Colors.white,
+                          ),
+                        ),
+                        TextButton(
+                          onPressed: () {},
+                          child: const Text(
+                            "160",
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 25,
+                                color: Colors.white),
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(
+                      width: 20,
+                    ),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text(
+                          "Diastolic",
+                          style: TextStyle(
+                            color: Colors.white,
+                          ),
+                        ),
+                        TextButton(
+                          onPressed: () {},
+                          child: const Text(
+                            "50",
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 25,
+                                color: Colors.white),
+                          ),
+                        ),
+                      ],
+                    )
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -214,90 +363,6 @@ class _HomePageState extends State<HomePage> {
           style: TextStyle(fontSize: 25),
         ),
       ),
-    );
-  }
-
-  Container _hbA1cTable() {
-    return Container(
-      height: 220,
-      color: Colors.grey.withOpacity(0.15),
-      child: Column(
-        children: [
-          Container(
-            height: 100,
-            color: Colors.amber,
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          Container(
-            height: 100,
-            color: Colors.amber,
-          ),
-        ],
-      ),
-      // child: ListView.separated(
-      //     itemBuilder: ((context, index) {
-      //       return Container(
-      //         height: 100,
-      //         decoration: BoxDecoration(
-      //             color: Colors.white, borderRadius: BorderRadius.circular(16)),
-      //         child: Column(children: [
-      //           const SizedBox(
-      //             height: 8,
-      //           ),
-      //           Text(
-      //             sections[index].name,
-      //             style: const TextStyle(
-      //               fontWeight: FontWeight.w600,
-      //               color: Color(0xff92A3FD),
-      //             ),
-      //           ),
-      //           Row(
-      //             children: [
-      //               Padding(
-      //                 padding: const EdgeInsets.only(left: 50),
-      //                 child: Text(
-      //                   sections[index].text1,
-      //                   style: const TextStyle(fontSize: 13),
-      //                 ),
-      //               ),
-      //               Padding(
-      //                 padding: const EdgeInsets.only(left: 200),
-      //                 child: Text(
-      //                   sections[index].text2,
-      //                   style: const TextStyle(fontSize: 13),
-      //                 ),
-      //               )
-      //             ],
-      //           ),
-      //           Row(
-      //             children: [
-      //               Padding(
-      //                 padding: const EdgeInsets.only(left: 60),
-      //                 child: Text(
-      //                   sections[index].value1,
-      //                   style: const TextStyle(
-      //                       fontSize: 20, fontWeight: FontWeight.w500),
-      //                 ),
-      //               ),
-      //               Padding(
-      //                 padding: const EdgeInsets.only(left: 220),
-      //                 child: Text(
-      //                   sections[index].value2,
-      //                   style: const TextStyle(
-      //                       fontSize: 20, fontWeight: FontWeight.w500),
-      //                 ),
-      //               )
-      //             ],
-      //           )
-      //         ]),
-      //       );
-      //     }),
-      //     separatorBuilder: ((context, index) => const SizedBox(
-      //           height: 10,
-      //         )),
-      //     itemCount: sections.length),
     );
   }
 
