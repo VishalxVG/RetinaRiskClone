@@ -19,7 +19,11 @@ class MyApp extends StatelessWidget {
         appBarTheme: AppBarTheme(color: barColor),
       ),
       title: 'RetinaRisk',
-      home: const HomePage(),
+      home: const HomePage(
+          selectedGender: "MALE",
+          selectedType: "1",
+          selectedDuration: "0",
+          selectedChecked: true),
     );
   }
 }

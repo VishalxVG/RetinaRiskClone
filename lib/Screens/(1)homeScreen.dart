@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:retinarisk/Modules/descriptionModule.dart';
 import 'package:retinarisk/Modules/sectionModule.dart';
+import 'package:retinarisk/Pages/InsertDataPage.dart';
 import 'package:retinarisk/Pages/ProfilePage.dart';
 
 import 'package:retinarisk/Screens/(4)TopicsPage.dart';
@@ -13,7 +14,16 @@ import 'package:retinarisk/common/utils/colors.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+  final String selectedGender;
+  final String selectedType;
+  final String selectedDuration;
+  final bool selectedChecked;
+  const HomePage(
+      {super.key,
+      required this.selectedGender,
+      required this.selectedType,
+      required this.selectedDuration,
+      required this.selectedChecked});
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -22,8 +32,20 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   List<DescriptionModule> descriptions = [];
   List<SectionModel> sections = [];
+  List<int> mmolValues = List.generate(91, (index) => index + 30);
+  List<int> systolicValues = List.generate(131, (index) => index + 90);
+  List<int> diastolicValues = List.generate(81, (index) => index + 60);
+  List<double> percentValues = List.generate(
+    (13.0 * 10 - 4.9 * 10) ~/ 1 + 1,
+    (index) => (4.9 * 10 + index).toDouble() / 10,
+  );
+
   int _currentPageIndex = 0;
   double newValue = 0;
+  int _mmolValue = 30;
+  int _systollicValue = 90;
+  int _diastollicValue = 60;
+  double _percentValue = 4.9;
 
   void _getInitialInfo() {
     descriptions = DescriptionModule.getDescription();
@@ -209,15 +231,25 @@ class _HomePageState extends State<HomePage> {
                             color: Colors.white,
                           ),
                         ),
-                        TextButton(
-                          onPressed: () {},
-                          child: const Text(
-                            "50",
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 25,
-                                color: Colors.white),
-                          ),
+                        DropdownButton(
+                          value: _mmolValue,
+                          items: mmolValues
+                              .map<DropdownMenuItem<int>>((int value) {
+                            return DropdownMenuItem<int>(
+                              value: value,
+                              child: Text(
+                                "$value",
+                                style: const TextStyle(
+                                    fontSize: 25, fontWeight: FontWeight.bold),
+                              ),
+                            );
+                          }).toList(),
+                          onChanged: (int? newValue) {
+                            setState(() {
+                              _mmolValue = newValue!;
+                            });
+                          },
+                          underline: Container(),
                         ),
                       ],
                     ),
@@ -228,20 +260,30 @@ class _HomePageState extends State<HomePage> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         const Text(
-                          "mmol/mol",
+                          "Percent",
                           style: TextStyle(
                             color: Colors.white,
                           ),
                         ),
-                        TextButton(
-                          onPressed: () {},
-                          child: const Text(
-                            "50",
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 25,
-                                color: Colors.white),
-                          ),
+                        DropdownButton<double>(
+                          value: _percentValue,
+                          items: percentValues
+                              .map<DropdownMenuItem<double>>((double value) {
+                            return DropdownMenuItem<double>(
+                              value: value,
+                              child: Text(
+                                "$value",
+                                style: const TextStyle(
+                                    fontSize: 25, fontWeight: FontWeight.bold),
+                              ),
+                            );
+                          }).toList(),
+                          onChanged: (double? newValue) {
+                            setState(() {
+                              _percentValue = newValue ?? 0.0;
+                            });
+                          },
+                          underline: Container(),
                         ),
                       ],
                     )
@@ -280,15 +322,25 @@ class _HomePageState extends State<HomePage> {
                             color: Colors.white,
                           ),
                         ),
-                        TextButton(
-                          onPressed: () {},
-                          child: const Text(
-                            "160",
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 25,
-                                color: Colors.white),
-                          ),
+                        DropdownButton(
+                          value: _systollicValue,
+                          items: systolicValues
+                              .map<DropdownMenuItem<int>>((int value) {
+                            return DropdownMenuItem<int>(
+                              value: value,
+                              child: Text(
+                                "$value",
+                                style: const TextStyle(
+                                    fontSize: 25, fontWeight: FontWeight.bold),
+                              ),
+                            );
+                          }).toList(),
+                          onChanged: (int? newValue) {
+                            setState(() {
+                              _systollicValue = newValue!;
+                            });
+                          },
+                          underline: Container(),
                         ),
                       ],
                     ),
@@ -304,15 +356,25 @@ class _HomePageState extends State<HomePage> {
                             color: Colors.white,
                           ),
                         ),
-                        TextButton(
-                          onPressed: () {},
-                          child: const Text(
-                            "50",
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 25,
-                                color: Colors.white),
-                          ),
+                        DropdownButton(
+                          value: _diastollicValue,
+                          items: diastolicValues
+                              .map<DropdownMenuItem<int>>((int value) {
+                            return DropdownMenuItem<int>(
+                              value: value,
+                              child: Text(
+                                "$value",
+                                style: const TextStyle(
+                                    fontSize: 25, fontWeight: FontWeight.bold),
+                              ),
+                            );
+                          }).toList(),
+                          onChanged: (int? newValue) {
+                            setState(() {
+                              _diastollicValue = newValue!;
+                            });
+                          },
+                          underline: Container(),
                         ),
                       ],
                     )
@@ -332,7 +394,7 @@ class _HomePageState extends State<HomePage> {
       child: ElevatedButton(
         onPressed: () {
           setState(() {
-            newValue = newValue + 30;
+            newValue = newValue + .5;
           });
         },
         style: ElevatedButton.styleFrom(
@@ -373,7 +435,10 @@ class _HomePageState extends State<HomePage> {
       height: 130,
       // color: Colors.grey.withOpacity(0.15),
       child: GestureDetector(
-        onTap: () {},
+        onTap: () {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => const InsertDataPage()));
+        },
         child: Row(
           children: [
             Container(
@@ -400,13 +465,13 @@ class _HomePageState extends State<HomePage> {
                       fontSize: 15,
                     ),
                   ),
-                  const Text(
-                    "Male",
-                    style: TextStyle(
+                  Text(
+                    widget.selectedGender,
+                    style: const TextStyle(
                         color: Colors.white,
                         fontSize: 18,
                         fontWeight: FontWeight.w600),
-                  )
+                  ),
                 ],
               ),
             ),
@@ -436,9 +501,9 @@ class _HomePageState extends State<HomePage> {
                       fontSize: 15,
                     ),
                   ),
-                  const Text(
-                    "Type 2",
-                    style: TextStyle(
+                  Text(
+                    "Type ${widget.selectedType}",
+                    style: const TextStyle(
                       color: Colors.white,
                       fontSize: 18,
                       fontWeight: FontWeight.w600,
@@ -473,9 +538,9 @@ class _HomePageState extends State<HomePage> {
                       fontSize: 15,
                     ),
                   ),
-                  const Text(
-                    "0 years",
-                    style: TextStyle(
+                  Text(
+                    "${widget.selectedDuration} years",
+                    style: const TextStyle(
                       color: Colors.white,
                       fontSize: 18,
                       fontWeight: FontWeight.w600,
@@ -509,9 +574,9 @@ class _HomePageState extends State<HomePage> {
                       fontSize: 15,
                     ),
                   ),
-                  const Text(
-                    "Yes",
-                    style: TextStyle(
+                  Text(
+                    widget.selectedChecked ? "Yes" : "No",
+                    style: const TextStyle(
                       color: Colors.white,
                       fontSize: 18,
                       fontWeight: FontWeight.w600,
@@ -530,28 +595,53 @@ class _HomePageState extends State<HomePage> {
     return Container(
         padding: const EdgeInsets.all(8),
         height: 220,
-        // color: Colors.black,
+        // color: Colors.red,
         //TODO : CUSTOMIZE THE GAUGE CHART
 
-        child: SfRadialGauge(
-          axes: <RadialAxis>[
-            RadialAxis(minimum: 0, maximum: 150, ranges: <GaugeRange>[
-              GaugeRange(startValue: 0, endValue: 50, color: Colors.green),
-              GaugeRange(startValue: 50, endValue: 100, color: Colors.orange),
-              GaugeRange(startValue: 100, endValue: 150, color: Colors.red)
-            ], pointers: <GaugePointer>[
-              NeedlePointer(value: newValue)
-            ], annotations: <GaugeAnnotation>[
+        child: SfRadialGauge(axes: <RadialAxis>[
+          RadialAxis(
+            minimum: 0,
+            maximum: 4.5,
+            showTicks: false,
+            interval: 1.5,
+            startAngle: 180,
+            radiusFactor: 1.5,
+            endAngle: 0,
+            labelsPosition: ElementsPosition.outside,
+            canScaleToFit: true,
+            annotations: <GaugeAnnotation>[
               GaugeAnnotation(
-                  widget: Container(
-                      child: const Text('90.0',
-                          style: TextStyle(
-                              fontSize: 25, fontWeight: FontWeight.bold))),
-                  angle: 90,
-                  positionFactor: 0.5)
-            ])
-          ],
-        ));
+                axisValue: 100,
+                positionFactor: 0.25,
+                widget: Text(
+                  "$newValue",
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 25,
+                  ),
+                ),
+              )
+            ],
+            showLastLabel: true,
+            axisLineStyle: const AxisLineStyle(thickness: 80),
+            pointers: [
+              RangePointer(
+                value: newValue,
+                enableAnimation: true,
+                animationType: AnimationType.bounceOut,
+                width: 80,
+                // gradient: const SweepGradient(
+                //     colors: <Color>[Colors.green, Colors.yellow, Colors.red],
+                //     stops: <double>[0.2, 0.4, 0.8]),
+                color: (newValue < 1.5)
+                    ? Colors.greenAccent
+                    : (newValue >= 1.5 && newValue <= 3)
+                        ? Colors.yellowAccent
+                        : Colors.redAccent,
+              )
+            ],
+          )
+        ]));
   }
 
   Container _floatingActionButton() {
